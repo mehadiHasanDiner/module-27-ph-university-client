@@ -38,12 +38,12 @@ const { Content, Header } = Layout;
 
 const MainLayout = () => {
   const dispatch = useAppDispatch()
-  const handleLogout = () => { 
+  const handleLogout = () => {
     dispatch(logout())
   }
 
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100%" }}>
       <Sidebar />
       <Layout>
         <Header><Button onClick={handleLogout}>Logout</Button></Header>
