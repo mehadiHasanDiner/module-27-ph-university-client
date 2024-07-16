@@ -28,6 +28,7 @@ const CreateAcademicSemester = () => {
 
     const toastId = toast.loading("Creating .......")
     const name = semesterOptions[Number(data?.name) - 1]?.label;
+    
     const semesterData = {
       name,
       code: data.name,
