@@ -1,11 +1,17 @@
-import { Table, TableColumnsType, TableProps } from "antd";
+import { Table, TableColumnsType, TableProps, Tag } from "antd";
 import { TAcademicSemester } from "../../../types/academicManagement.type";
+import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagement.api";
 
 export type TTableData = Pick<
   TAcademicSemester,
   "name" | "year" | "startMonth" | "endMonth"
 >;
 const AcademicSemester = () => {
+  const {
+    data: semesterData,
+    isLoading,
+    isFetching,
+  } = useAddAcademicSemesterMutation(undefined);
   // const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
 
   const tableData = semesterData?.data?.map(
@@ -88,7 +94,7 @@ const AcademicSemester = () => {
       loading={isFetching}
       columns={columns}
       dataSource={tableData}
-      onChange={onChange}
+      // onChange={onChange}
     />
   );
 };
