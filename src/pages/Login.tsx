@@ -21,9 +21,14 @@ const Login = () => {
   // });
 
   const defaultValues = {
-    userId: "A-0001",
-    password: "admin123456",
+    userId: "2030010001",
+    password: "student123",
   };
+
+  // const defaultValues = {
+  //   userId: "A-0001",
+  //   password: "admin123456",
+  // };
 
   const [login] = useLoginMutation();
 
@@ -37,10 +42,17 @@ const Login = () => {
         password: data.password,
       };
       const res = await login(userInfo).unwrap();
+
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in successfully", { id: toastId, duration: 3000 });
-      navigate(`/${user.role}/dashboard`);
+
+      if (res.data.needsPasswordChange) {
+        navigate(`/change-password`);
+      } else {
+        navigate(`/${user.role}/dashboard`);
+      }
+      
     } catch (err) {
       toast.error("Something went wrong", { id: toastId, duration: 3000 });
     }
